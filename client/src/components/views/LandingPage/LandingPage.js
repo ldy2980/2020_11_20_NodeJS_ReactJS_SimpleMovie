@@ -25,14 +25,22 @@ function LandingPage() {
   };
 
   const loadMoreItems = () => {
-    const endPoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${CurrentPage + 1}`;
+    const endPoint = `${API_URL}movie/popular?api_key=${API_KEY}&language=en-US&page=${
+      CurrentPage + 1
+    }`;
     fetchMovies(endPoint);
   };
 
   return (
     <div style={{ width: '100%', margin: '0' }}>
       {/* Main Image */}
-      {MainMovieImage && <MainImage image={`${IMAGE_BASE_URL}w1280${MainMovieImage.backdrop_path}`} title={MainMovieImage.original_title} text={MainMovieImage.overview} />}
+      {MainMovieImage && (
+        <MainImage
+          image={`${IMAGE_BASE_URL}w1280${MainMovieImage.backdrop_path}`}
+          title={MainMovieImage.original_title}
+          text={MainMovieImage.overview}
+        />
+      )}
 
       <div style={{ width: '85%', margin: '1rem auto' }}>
         <h2>영화 목록</h2>
@@ -43,7 +51,12 @@ function LandingPage() {
           {Movies &&
             Movies.map((movie, index) => (
               <React.Fragment key={index}>
-                <GridCard image={movie.poster_path ? `${IMAGE_BASE_URL}w500${movie.poster_path}` : null} movieId={movie.id} movieName={movie.original_title} />
+                <GridCard
+                  landingPage
+                  image={movie.poster_path ? `${IMAGE_BASE_URL}w500${movie.poster_path}` : null}
+                  movieId={movie.id}
+                  movieName={movie.original_title}
+                />
               </React.Fragment>
             ))}
         </Row>
